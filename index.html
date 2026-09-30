@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nova Vision Advisory - Corporate advisory, accounting, tax, HR, banking and business support services.">
+    <meta name="description" content="Nova Vision Advisory - Corporate advisory, accounting, tax, HR, banking, Odoo implementation and business support services.">
     <title>Nova Vision Advisory | Global Business Partner</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -132,6 +132,98 @@
             .faq-native, .faq-native * { pointer-events:auto !important; }
             .contact-native, .contact-native * { pointer-events:auto !important; }
         }
+
+
+        /* Industries section */
+        .industry-card {
+            position: relative;
+            min-height: 245px;
+            overflow: hidden;
+            isolation: isolate;
+            border: 1px solid rgba(255,255,255,.08);
+            background:
+                radial-gradient(circle at 85% 15%, var(--industry-glow, rgba(0,210,255,.15)), transparent 36%),
+                linear-gradient(145deg, rgba(10,27,58,.96), rgba(3,14,38,.94));
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.18);
+        }
+        .industry-card::after {
+            content:'';
+            position:absolute;
+            inset:auto -20% -45% 30%;
+            height:170px;
+            border-radius:50%;
+            background:var(--industry-glow, rgba(0,210,255,.12));
+            filter:blur(45px);
+            opacity:.55;
+            z-index:-1;
+            pointer-events:none;
+        }
+        .industry-watermark {
+            position:absolute;
+            right:20px;
+            bottom:10px;
+            font-size:6.5rem;
+            opacity:.055;
+            transform:rotate(-7deg);
+            pointer-events:none;
+        }
+        html[dir="rtl"] .industry-watermark { right:auto; left:20px; transform:rotate(7deg); }
+        .industry-icon {
+            width:58px; height:58px; border-radius:18px;
+            display:flex; align-items:center; justify-content:center;
+            border:1px solid color-mix(in srgb, var(--industry-accent, #00D2FF) 45%, transparent);
+            color:var(--industry-accent, #00D2FF);
+            background:color-mix(in srgb, var(--industry-accent, #00D2FF) 12%, transparent);
+            box-shadow:0 0 28px color-mix(in srgb, var(--industry-accent, #00D2FF) 13%, transparent);
+        }
+        @supports not (color: color-mix(in srgb, red 50%, blue)) {
+            .industry-icon { border-color:rgba(255,255,255,.13); background:rgba(255,255,255,.05); }
+        }
+        .industry-accent-line { width:42px; height:3px; border-radius:99px; background:var(--industry-accent, #00D2FF); }
+
+        /* Odoo solutions */
+        .odoo-shell {
+            position:relative;
+            overflow:hidden;
+            background:
+                radial-gradient(circle at 12% 20%, rgba(113,75,103,.28), transparent 34%),
+                radial-gradient(circle at 92% 72%, rgba(0,210,255,.12), transparent 34%),
+                linear-gradient(135deg, rgba(8,22,48,.98), rgba(3,14,38,.98));
+            border:1px solid rgba(255,255,255,.09);
+            box-shadow:0 30px 80px rgba(0,0,0,.30);
+        }
+        .odoo-logo-stage {
+            background:
+                radial-gradient(circle at 18% 18%, rgba(113,75,103,.14), transparent 34%),
+                radial-gradient(circle at 84% 82%, rgba(0,210,255,.08), transparent 32%),
+                linear-gradient(145deg, #ffffff 0%, #f4f0f5 58%, #edf3f8 100%);
+            border:1px solid rgba(113,75,103,.16);
+            box-shadow:0 22px 60px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.95);
+        }
+        .odoo-chip {
+            border:1px solid rgba(166,122,157,.42);
+            background:rgba(113,75,103,.22);
+            color:#ffffff;
+            box-shadow:0 8px 22px rgba(113,75,103,.12);
+        }
+        .odoo-logo-stage .odoo-chip {
+            background:#714B67;
+            border-color:#714B67;
+            color:#ffffff;
+            box-shadow:0 8px 22px rgba(113,75,103,.22);
+            text-shadow:0 1px 1px rgba(0,0,0,.16);
+        }
+        .odoo-feature {
+            background:rgba(255,255,255,.035);
+            border:1px solid rgba(255,255,255,.07);
+        }
+        .odoo-orb { pointer-events:none; user-select:none; }
+        @media (max-width: 767px) {
+            .industry-card { min-height: 215px; }
+            .industry-watermark { font-size:5rem; }
+            .odoo-logo-stage { min-height:190px; }
+        }
+
     </style>
 </head>
 <body class="antialiased selection:bg-nova-purple selection:text-white relative">
@@ -302,6 +394,113 @@
         </div>
     </section>
 
+
+    <!-- INDUSTRIES -->
+    <section id="industries" class="py-24 relative overflow-hidden border-y border-white/5 bg-[#010614]/35">
+        <div class="decorative-layer absolute -top-20 -right-20 w-80 h-80 bg-nova-purple/10 blur-3xl rounded-full"></div>
+        <div class="decorative-layer absolute -bottom-24 -left-24 w-80 h-80 bg-nova-cyan/10 blur-3xl rounded-full"></div>
+        <div class="max-w-7xl mx-auto px-5 sm:px-6 relative z-10">
+            <div class="text-center mb-14 md:mb-16">
+                <p class="uppercase tracking-[.25em] text-sm font-bold text-nova-cyan mb-4" data-i18n="industries.eyebrow">Sector Experience</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-5"><span data-i18n="industries.title1">Industries We</span> <span class="text-gradient" data-i18n="industries.title2">Serve</span></h2>
+                <p class="text-gray-400 max-w-3xl mx-auto text-base md:text-lg" data-i18n="industries.body">Cross-functional expertise built around the realities of each sector — from financial control and people operations to process design and growth support.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6">
+                <article class="industry-card rounded-3xl p-6 md:p-7 hover-lift" style="--industry-accent:#00D2FF;--industry-glow:rgba(0,210,255,.16)">
+                    <div class="industry-icon mb-6"><i class="fa-solid fa-building text-2xl"></i></div><div class="industry-accent-line mb-5"></div>
+                    <h3 class="text-xl font-extrabold mb-3" data-i18n="industries.constructionTitle">Construction & Real Estate</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="industries.constructionBody">Project accounting, controls, tax, payroll and operational support for growing businesses.</p>
+                    <i class="industry-watermark fa-solid fa-building"></i>
+                </article>
+                <article class="industry-card rounded-3xl p-6 md:p-7 hover-lift" style="--industry-accent:#9B5DE5;--industry-glow:rgba(155,93,229,.18)">
+                    <div class="industry-icon mb-6"><i class="fa-solid fa-boxes-stacked text-2xl"></i></div><div class="industry-accent-line mb-5"></div>
+                    <h3 class="text-xl font-extrabold mb-3" data-i18n="industries.tradingTitle">Trading & Distribution</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="industries.tradingBody">Inventory, working capital, reporting and tax support across fast-moving operations.</p>
+                    <i class="industry-watermark fa-solid fa-boxes-stacked"></i>
+                </article>
+                <article class="industry-card rounded-3xl p-6 md:p-7 hover-lift" style="--industry-accent:#34E1D1;--industry-glow:rgba(52,225,209,.17)">
+                    <div class="industry-icon mb-6"><i class="fa-solid fa-heart-pulse text-2xl"></i></div><div class="industry-accent-line mb-5"></div>
+                    <h3 class="text-xl font-extrabold mb-3" data-i18n="industries.healthTitle">Healthcare & Medical</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="industries.healthBody">Structured finance, compliance, payroll and management reporting for healthcare operations.</p>
+                    <i class="industry-watermark fa-solid fa-heart-pulse"></i>
+                </article>
+                <article class="industry-card rounded-3xl p-6 md:p-7 hover-lift" style="--industry-accent:#FF9A3C;--industry-glow:rgba(255,154,60,.17)">
+                    <div class="industry-icon mb-6"><i class="fa-solid fa-microchip text-2xl"></i></div><div class="industry-accent-line mb-5"></div>
+                    <h3 class="text-xl font-extrabold mb-3" data-i18n="industries.techTitle">Technology & IT</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="industries.techBody">Scalable finance processes, management reporting, HR support and operating structure.</p>
+                    <i class="industry-watermark fa-solid fa-microchip"></i>
+                </article>
+                <article class="industry-card rounded-3xl p-6 md:p-7 hover-lift" style="--industry-accent:#E95EEB;--industry-glow:rgba(233,94,235,.16)">
+                    <div class="industry-icon mb-6"><i class="fa-solid fa-bell-concierge text-2xl"></i></div><div class="industry-accent-line mb-5"></div>
+                    <h3 class="text-xl font-extrabold mb-3" data-i18n="industries.hospitalityTitle">Hospitality & F&amp;B</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="industries.hospitalityBody">Costing, budgeting, payroll, controls and operational reporting for service-driven businesses.</p>
+                    <i class="industry-watermark fa-solid fa-bell-concierge"></i>
+                </article>
+                <article class="industry-card rounded-3xl p-6 md:p-7 hover-lift" style="--industry-accent:#FF8C00;--industry-glow:rgba(255,140,0,.16)">
+                    <div class="industry-icon mb-6"><i class="fa-solid fa-gears text-2xl"></i></div><div class="industry-accent-line mb-5"></div>
+                    <h3 class="text-xl font-extrabold mb-3" data-i18n="industries.manufacturingTitle">Manufacturing & Industrial</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="industries.manufacturingBody">Cost accounting, inventory control, budgeting and performance analysis across operations.</p>
+                    <i class="industry-watermark fa-solid fa-gears"></i>
+                </article>
+                <article class="industry-card rounded-3xl p-6 md:p-7 hover-lift" style="--industry-accent:#A96CFF;--industry-glow:rgba(169,108,255,.17)">
+                    <div class="industry-icon mb-6"><i class="fa-solid fa-briefcase text-2xl"></i></div><div class="industry-accent-line mb-5"></div>
+                    <h3 class="text-xl font-extrabold mb-3" data-i18n="industries.professionalTitle">Professional Services</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="industries.professionalBody">Bookkeeping, tax, payroll, reporting and advisory support built around client-service businesses.</p>
+                    <i class="industry-watermark fa-solid fa-briefcase"></i>
+                </article>
+                <article class="industry-card rounded-3xl p-6 md:p-7 hover-lift" style="--industry-accent:#3DE0C5;--industry-glow:rgba(61,224,197,.16)">
+                    <div class="industry-icon mb-6"><i class="fa-solid fa-seedling text-2xl"></i></div><div class="industry-accent-line mb-5"></div>
+                    <h3 class="text-xl font-extrabold mb-3" data-i18n="industries.agriTitle">Agriculture & Resources</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="industries.agriBody">Cost tracking, controls, reporting and operational support across resource-based businesses.</p>
+                    <i class="industry-watermark fa-solid fa-seedling"></i>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ODOO SOLUTIONS -->
+    <section id="odoo-solutions" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6">
+            <div class="odoo-shell rounded-[2rem] p-6 md:p-10 lg:p-12 relative">
+                <div class="odoo-orb absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#714B67]/20 blur-3xl"></div>
+                <div class="odoo-orb absolute -bottom-32 -left-24 w-80 h-80 rounded-full bg-nova-cyan/10 blur-3xl"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center relative z-10">
+                    <div class="lg:col-span-2">
+                        <div class="odoo-logo-stage min-h-[220px] md:min-h-[260px] rounded-3xl p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
+                            <div class="absolute inset-0 opacity-30" style="background-image:radial-gradient(circle at 20% 20%, rgba(113,75,103,.18), transparent 36%), radial-gradient(circle at 80% 80%, rgba(0,210,255,.12), transparent 34%);"></div>
+                            <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Odoo%20logo.svg" alt="Odoo" class="relative z-10 w-44 md:w-56 h-auto mb-6" loading="lazy">
+                            <div class="relative z-10 flex flex-wrap justify-center gap-2">
+                                <span class="odoo-chip rounded-full px-4 py-2 text-xs font-bold" data-i18n="odoo.chip1">Implementation</span>
+                                <span class="odoo-chip rounded-full px-4 py-2 text-xs font-bold" data-i18n="odoo.chip2">Configuration</span>
+                                <span class="odoo-chip rounded-full px-4 py-2 text-xs font-bold" data-i18n="odoo.chip3">Training & Support</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-3">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full odoo-chip text-sm font-bold mb-5"><span class="w-2 h-2 rounded-full bg-[#A77B9D] animate-pulse"></span><span data-i18n="odoo.eyebrow">Odoo Business Solutions</span></div>
+                        <h2 class="text-4xl md:text-5xl font-extrabold leading-tight mb-5"><span data-i18n="odoo.title1">Run your business on</span> <span style="color:#A77B9D">Odoo.</span> <span class="text-gradient" data-i18n="odoo.title2">Built around you.</span></h2>
+                        <p class="text-gray-300 text-lg leading-relaxed mb-7" data-i18n="odoo.body">We implement and configure Odoo around your real workflows — helping you connect finance, sales, purchasing, inventory and day-to-day operations in one practical system.</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-7">
+                            <div class="odoo-feature rounded-2xl p-4 flex gap-3"><i class="fa-solid fa-sliders text-[#C69BBC] mt-1"></i><span class="text-sm text-gray-300" data-i18n="odoo.f1">Implementation & business process configuration</span></div>
+                            <div class="odoo-feature rounded-2xl p-4 flex gap-3"><i class="fa-solid fa-calculator text-nova-cyan mt-1"></i><span class="text-sm text-gray-300" data-i18n="odoo.f2">Accounting, finance and reporting setup</span></div>
+                            <div class="odoo-feature rounded-2xl p-4 flex gap-3"><i class="fa-solid fa-boxes-stacked text-nova-orange mt-1"></i><span class="text-sm text-gray-300" data-i18n="odoo.f3">Sales, CRM, purchasing and inventory workflows</span></div>
+                            <div class="odoo-feature rounded-2xl p-4 flex gap-3"><i class="fa-solid fa-graduation-cap text-nova-purple mt-1"></i><span class="text-sm text-gray-300" data-i18n="odoo.f4">User training, go-live support and optimization</span></div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
+                            <a href="#lead-form" class="bg-[#714B67] hover:bg-[#825a78] text-white font-extrabold px-7 py-4 rounded-2xl transition flex items-center justify-center gap-3 shadow-[0_16px_35px_rgba(113,75,103,.24)]"><span data-i18n="odoo.cta">Talk to us about Odoo</span><i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
+                            <div><p class="font-bold text-white" data-i18n="odoo.priceTitle">Competitive, cost-conscious packages</p><p class="text-sm text-gray-500" data-i18n="odoo.priceBody">Scope and pricing are tailored to company size, modules and implementation needs.</p></div>
+                        </div>
+                        <p class="text-[11px] text-gray-600 mt-6 leading-relaxed" data-i18n="odoo.disclaimer">Odoo is a trademark of Odoo S.A. Nova Vision Advisory provides independent implementation and advisory services and does not claim official partnership status.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTPRINT -->
     <section id="footprint" class="py-20 border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6 text-center">
@@ -462,6 +661,7 @@
                                     <option value="Corporate Banking & Trade Finance" data-i18n="form.serviceBank">Corporate Banking & Trade Finance</option>
                                     <option value="Treasury Management" data-i18n="services.bank2">Treasury Management</option>
                                     <option value="Business Setup & Structuring" data-i18n="services.advisory1">Business Setup & Structuring</option>
+                                    <option value="Odoo Implementation & Solutions" data-i18n="odoo.serviceOption">Odoo Implementation & Solutions</option>
                                     <option value="Other" data-i18n="form.other">Other</option>
                                 </select>
                             </div>
@@ -519,6 +719,8 @@
                 'hero.eyebrow':'Corporate Advisory & Management','hero.title1':'From Vision.','hero.title2':'To Operation. To Growth.','hero.body':'We go beyond traditional consulting. We work alongside our clients as an integrated business partner to build and manage businesses from the ground up.','hero.explore':'Explore Services','hero.callback':'Request a Callback',
                 'about.eyebrow':'About Nova Vision','about.title1':'Built on experience.','about.title2':'Focused on execution.','about.p1':'Since 2020, Nova Vision Advisory has supported businesses with practical, hands-on solutions across finance, accounting, tax, people, banking and business operations.','about.p2':'Our approach combines specialist expertise with real operating experience. We do not stop at recommendations; we work alongside management teams to build processes, strengthen control, solve day-to-day challenges and create a clearer path for sustainable growth.','about.stat1Title':'Market presence','about.stat1Body':'Supporting businesses with an execution-first mindset.','about.stat2Title':'Integrated teams','about.stat2Body':'Advisory, Finance & Tax, People, and Banking.','about.stat3Title':'Markets experienced','about.stat3Body':'Regional and international business exposure.','about.stat4Title':'Coordinated partner','about.stat4Body':'One point of coordination across multiple business needs.',
                 'services.title1':'Integrated','services.title2':'Capabilities','services.body':'Four specialist teams. One coordinated delivery model. Choose a single function or combine services into an end-to-end managed operating platform.','services.advisoryTitle':'Business Advisory','services.advisory1':'Business Setup & Structuring','services.advisory2':'Performance Management','services.advisory3':'Process Optimization','services.accountingTitle':'Accounting & Tax','services.accounting1':'Full-cycle Bookkeeping','services.accounting2':'Tax Compliance & Advisory','services.accounting3':'Financial Control (IFRS)','services.hrTitle':'HR & People','services.hr1':'Talent Acquisition','services.hr2':'Payroll & Compensation','services.hr3':'HR Policies Setup','services.bankTitle':'Corporate Banking','services.bank1':'Trade Finance (LCs/LGs)','services.bank2':'Treasury Management','services.bank3':'Working Capital',
+                'industries.eyebrow':'Sector Experience','industries.title1':'Industries We','industries.title2':'Serve','industries.body':'Cross-functional expertise built around the realities of each sector — from financial control and people operations to process design and growth support.','industries.constructionTitle':'Construction & Real Estate','industries.constructionBody':'Project accounting, controls, tax, payroll and operational support for growing businesses.','industries.tradingTitle':'Trading & Distribution','industries.tradingBody':'Inventory, working capital, reporting and tax support across fast-moving operations.','industries.healthTitle':'Healthcare & Medical','industries.healthBody':'Structured finance, compliance, payroll and management reporting for healthcare operations.','industries.techTitle':'Technology & IT','industries.techBody':'Scalable finance processes, management reporting, HR support and operating structure.','industries.hospitalityTitle':'Hospitality & F&B','industries.hospitalityBody':'Costing, budgeting, payroll, controls and operational reporting for service-driven businesses.','industries.manufacturingTitle':'Manufacturing & Industrial','industries.manufacturingBody':'Cost accounting, inventory control, budgeting and performance analysis across operations.','industries.professionalTitle':'Professional Services','industries.professionalBody':'Bookkeeping, tax, payroll, reporting and advisory support built around client-service businesses.','industries.agriTitle':'Agriculture & Resources','industries.agriBody':'Cost tracking, controls, reporting and operational support across resource-based businesses.',
+                'odoo.eyebrow':'Odoo Business Solutions','odoo.title1':'Run your business on','odoo.title2':'Built around you.','odoo.body':'We implement and configure Odoo around your real workflows — helping you connect finance, sales, purchasing, inventory and day-to-day operations in one practical system.','odoo.chip1':'Implementation','odoo.chip2':'Configuration','odoo.chip3':'Training & Support','odoo.f1':'Implementation & business process configuration','odoo.f2':'Accounting, finance and reporting setup','odoo.f3':'Sales, CRM, purchasing and inventory workflows','odoo.f4':'User training, go-live support and optimization','odoo.cta':'Talk to us about Odoo','odoo.priceTitle':'Competitive, cost-conscious packages','odoo.priceBody':'Scope and pricing are tailored to company size, modules and implementation needs.','odoo.disclaimer':'Odoo is a trademark of Odoo S.A. Nova Vision Advisory provides independent implementation and advisory services and does not claim official partnership status.','odoo.serviceOption':'Odoo Implementation & Solutions',
                 'footprint.title1':'Experience That','footprint.title2':'Travels','countries.egypt':'Egypt (HQ)','countries.saudi':'Saudi Arabia','countries.uae':'UAE','countries.oman':'Oman','countries.qatar':'Qatar','countries.india':'India','countries.philippines':'Philippines',
                 'meeting.title1':'Book a','meeting.title2':'Meeting','meeting.body':"Tell us where you want the business to go. We'll help build the operating engine to get it there.",'meeting.direct':'Direct Line','meeting.support':'Support Line','meeting.choose':'Choose how you want to contact us','meeting.emailTitle':'Email Address','meeting.emailBody':'Send us a message',
                 'faq.eyebrow':'Frequently Asked Questions','faq.title1':'Clear answers before','faq.title2':'we get started.','faq.q1':'Do we need to subscribe to all services?','faq.a1':'No. You can engage Nova Vision for one specific service only, or combine several functions when that creates more value. We tailor the scope to what your business actually needs.','faq.q2':'How are professional fees determined?','faq.a2':'Fees are based on the size and complexity of the work, the services required, transaction volume, level of involvement and delivery model. We first understand the scope, then provide a clear proposal so you know exactly what is included before work begins.','faq.q3':'How can we contact Nova Vision?','faq.a3':'You have two simple options: contact us directly using the phone, WhatsApp or email details shown on this website, or leave your details in the callback form below and our team will contact you.','faq.q4':'Can you support businesses outside Egypt?','faq.a4':'Yes. Our experience covers multiple regional and international markets, and many services can be delivered remotely or through a coordinated hybrid model depending on the assignment and local requirements.','faq.q5':'How do you handle confidential business information?','faq.a5':'We treat client information as confidential and limit its use to the agreed engagement. We also encourage clients not to submit passwords, banking credentials or highly sensitive records through the website contact form.',
@@ -531,6 +733,8 @@
                 'hero.eyebrow':'الاستشارات وإدارة الأعمال','hero.title1':'من الرؤية.','hero.title2':'إلى التشغيل. إلى النمو.','hero.body':'نحن نتجاوز مفهوم الاستشارات التقليدية، ونعمل جنباً إلى جنب مع عملائنا كشريك أعمال متكامل لبناء وإدارة الشركات من مرحلة التأسيس وحتى التشغيل والنمو.','hero.explore':'استكشف الخدمات','hero.callback':'اطلب تواصلاً',
                 'about.eyebrow':'عن نوفا فيجن','about.title1':'خبرة عملية.','about.title2':'وتركيز على التنفيذ.','about.p1':'منذ عام 2020، تدعم Nova Vision Advisory الشركات بحلول عملية في مجالات المالية والمحاسبة والضرائب والموارد البشرية والخدمات المصرفية وتشغيل الأعمال.','about.p2':'يجمع أسلوبنا بين الخبرة التخصصية والخبرة الفعلية في بيئات العمل. لا نتوقف عند تقديم التوصيات؛ بل نعمل مع فرق الإدارة على بناء الإجراءات، وتعزيز الرقابة، وحل التحديات اليومية، وتهيئة مسار أوضح للنمو المستدام.','about.stat1Title':'تواجد في السوق','about.stat1Body':'ندعم الأعمال بعقلية تركز على التنفيذ والنتائج.','about.stat2Title':'فرق متكاملة','about.stat2Body':'الاستشارات، المالية والضرائب، الموارد البشرية، والخدمات المصرفية.','about.stat3Title':'خبرات متعددة الأسواق','about.stat3Body':'خبرات إقليمية ودولية في بيئات أعمال متنوعة.','about.stat4Title':'شريك منسق واحد','about.stat4Body':'نقطة تنسيق واحدة لاحتياجات أعمال متعددة.',
                 'services.title1':'قدرات','services.title2':'متكاملة','services.body':'أربع فرق متخصصة ونموذج عمل منسق واحد. يمكنك اختيار خدمة واحدة فقط أو دمج عدة خدمات في نموذج تشغيلي متكامل.','services.advisoryTitle':'استشارات الأعمال','services.advisory1':'تأسيس وهيكلة الأعمال','services.advisory2':'إدارة الأداء','services.advisory3':'تحسين العمليات','services.accountingTitle':'المحاسبة والضرائب','services.accounting1':'إمساك الدفاتر والدورة المحاسبية كاملة','services.accounting2':'الالتزام والاستشارات الضريبية','services.accounting3':'الرقابة المالية وفق IFRS','services.hrTitle':'الموارد البشرية والأفراد','services.hr1':'استقطاب المواهب','services.hr2':'الرواتب والتعويضات','services.hr3':'إعداد سياسات الموارد البشرية','services.bankTitle':'الخدمات المصرفية للشركات','services.bank1':'التمويل التجاري (LCs/LGs)','services.bank2':'إدارة الخزانة','services.bank3':'رأس المال العامل',
+                'industries.eyebrow':'خبرات قطاعية','industries.title1':'قطاعات','industries.title2':'نخدمها','industries.body':'خبرات متكاملة مبنية على طبيعة كل قطاع، من الرقابة المالية وإدارة الأفراد إلى تصميم العمليات ودعم النمو.','industries.constructionTitle':'المقاولات والتطوير العقاري','industries.constructionBody':'محاسبة المشروعات والرقابة والضرائب والرواتب والدعم التشغيلي للشركات النامية.','industries.tradingTitle':'التجارة والتوزيع','industries.tradingBody':'إدارة المخزون ورأس المال العامل والتقارير والدعم الضريبي للعمليات سريعة الحركة.','industries.healthTitle':'الرعاية الصحية والقطاع الطبي','industries.healthBody':'هيكلة مالية والتزام ورواتب وتقارير إدارية تناسب طبيعة المؤسسات الطبية.','industries.techTitle':'التكنولوجيا وقطاع IT','industries.techBody':'عمليات مالية قابلة للتوسع وتقارير إدارية ودعم موارد بشرية وهيكل تشغيلي أكثر وضوحاً.','industries.hospitalityTitle':'الضيافة والأغذية والمشروبات','industries.hospitalityBody':'التكاليف والموازنات والرواتب والرقابة والتقارير التشغيلية للأعمال الخدمية.','industries.manufacturingTitle':'التصنيع والقطاع الصناعي','industries.manufacturingBody':'محاسبة التكاليف والرقابة على المخزون والموازنات وتحليل الأداء التشغيلي.','industries.professionalTitle':'الخدمات المهنية','industries.professionalBody':'المحاسبة والضرائب والرواتب والتقارير والاستشارات المصممة لشركات الخدمات.','industries.agriTitle':'الزراعة والموارد','industries.agriBody':'تتبع التكاليف والرقابة والتقارير والدعم التشغيلي للأعمال القائمة على الموارد.',
+                'odoo.eyebrow':'حلول Odoo للأعمال','odoo.title1':'شغّل أعمالك على','odoo.title2':'مصمم حول احتياجك.','odoo.body':'نقوم بتطبيق وتهيئة Odoo بناءً على دورة العمل الفعلية داخل شركتك، لربط المالية والمبيعات والمشتريات والمخزون والعمليات اليومية داخل نظام عملي واحد.','odoo.chip1':'تطبيق النظام','odoo.chip2':'التهيئة والإعداد','odoo.chip3':'التدريب والدعم','odoo.f1':'تطبيق النظام وتهيئة إجراءات العمل','odoo.f2':'إعداد المحاسبة والمالية والتقارير','odoo.f3':'المبيعات وCRM والمشتريات والمخزون','odoo.f4':'تدريب المستخدمين ودعم التشغيل والتحسين','odoo.cta':'تحدث معنا عن Odoo','odoo.priceTitle':'باقات تنفيذ تنافسية وفعّالة من حيث التكلفة','odoo.priceBody':'يتم تحديد النطاق والسعر حسب حجم الشركة والموديولات واحتياجات التطبيق الفعلية.','odoo.disclaimer':'Odoo علامة تجارية مملوكة لشركة Odoo S.A. وتقدم Nova Vision Advisory خدمات تطبيق واستشارات مستقلة ولا تدعي صفة الشريك الرسمي.','odoo.serviceOption':'تطبيق وحلول Odoo',
                 'footprint.title1':'خبرة','footprint.title2':'عابرة للأسواق','countries.egypt':'مصر (المقر)','countries.saudi':'السعودية','countries.uae':'الإمارات','countries.oman':'عُمان','countries.qatar':'قطر','countries.india':'الهند','countries.philippines':'الفلبين',
                 'meeting.title1':'احجز','meeting.title2':'اجتماعاً','meeting.body':'شاركنا إلى أين تريد أن يصل عملك، وسنساعدك على بناء المحرك التشغيلي الذي يدعم الوصول إلى هناك.','meeting.direct':'الخط المباشر','meeting.support':'خط الدعم','meeting.choose':'اختر طريقة التواصل المناسبة لك','meeting.emailTitle':'البريد الإلكتروني','meeting.emailBody':'أرسل لنا رسالة',
                 'faq.eyebrow':'الأسئلة الشائعة','faq.title1':'إجابات واضحة قبل','faq.title2':'أن نبدأ.','faq.q1':'هل يجب التعاقد على جميع الخدمات؟','faq.a1':'لا. يمكنك التعاقد مع Nova Vision على خدمة واحدة فقط، أو دمج أكثر من خدمة إذا كان ذلك يحقق قيمة أكبر. نحن نحدد نطاق العمل وفقاً لاحتياج نشاطك الفعلي.','faq.q2':'كيف يتم تحديد الأتعاب المهنية؟','faq.a2':'تتحدد الأتعاب بناءً على حجم وتعقيد العمل، والخدمات المطلوبة، وحجم المعاملات، ومستوى التدخل المطلوب، وطريقة تقديم الخدمة. نفهم نطاق العمل أولاً ثم نقدم عرضاً واضحاً يحدد ما يشمله الاتفاق قبل بدء التنفيذ.','faq.q3':'كيف يمكن التواصل مع Nova Vision؟','faq.a3':'لديك طريقتان بسيطتان: التواصل معنا مباشرة من خلال أرقام الهاتف أو واتساب أو البريد الإلكتروني الموضحة بالموقع، أو ترك بياناتك في نموذج طلب التواصل بالأسفل وسيتواصل معك فريقنا.','faq.q4':'هل يمكنكم خدمة شركات خارج مصر؟','faq.a4':'نعم. تمتد خبراتنا إلى عدة أسواق إقليمية ودولية، ويمكن تقديم العديد من الخدمات عن بُعد أو من خلال نموذج هجين منسق وفق طبيعة المهمة والمتطلبات المحلية.','faq.q5':'كيف تتعاملون مع معلومات الشركات السرية؟','faq.a5':'نتعامل مع معلومات العملاء بسرية ونستخدمها في حدود نطاق العمل المتفق عليه. كما ننصح بعدم إرسال كلمات المرور أو بيانات الدخول البنكية أو المعلومات شديدة الحساسية من خلال نموذج التواصل بالموقع.',
@@ -543,6 +747,8 @@
                 'hero.eyebrow':'企业咨询与管理','hero.title1':'从愿景出发。','hero.title2':'到运营，再到增长。','hero.body':'我们不止提供传统咨询服务。我们与客户并肩合作，作为一体化业务伙伴，从零开始协助企业搭建、运营与发展。','hero.explore':'查看服务','hero.callback':'申请回电',
                 'about.eyebrow':'关于 Nova Vision','about.title1':'以经验为基础。','about.title2':'以执行为核心。','about.p1':'自2020年以来，Nova Vision Advisory 一直为企业提供务实、可落地的解决方案，涵盖财务、会计、税务、人力资源、企业银行及业务运营。','about.p2':'我们的工作方式结合专业知识与实际运营经验。我们不止提出建议，还与管理团队共同建立流程、加强控制、解决日常问题，并为可持续增长打造更清晰的路径。','about.stat1Title':'市场经验','about.stat1Body':'以执行优先的方式支持企业发展。','about.stat2Title':'四大协同团队','about.stat2Body':'咨询、财税、人力资源及企业银行。','about.stat3Title':'多市场经验','about.stat3Body':'覆盖区域及国际商业环境。','about.stat4Title':'统一协调伙伴','about.stat4Body':'一个协调窗口，连接多项业务需求。',
                 'services.title1':'一体化','services.title2':'专业能力','services.body':'四支专业团队，一个协同交付模式。您可以选择单项服务，也可以组合多项服务形成端到端运营支持。','services.advisoryTitle':'商业咨询','services.advisory1':'企业设立与架构','services.advisory2':'绩效管理','services.advisory3':'流程优化','services.accountingTitle':'会计与税务','services.accounting1':'全流程记账','services.accounting2':'税务合规与咨询','services.accounting3':'财务控制（IFRS）','services.hrTitle':'人力资源','services.hr1':'人才招聘','services.hr2':'薪资与薪酬','services.hr3':'人力资源制度搭建','services.bankTitle':'企业银行服务','services.bank1':'贸易融资（LC/LG）','services.bank2':'资金管理','services.bank3':'营运资金',
+                'industries.eyebrow':'行业经验','industries.title1':'我们服务的','industries.title2':'行业','industries.body':'围绕不同行业的真实运营需求提供跨职能支持，从财务控制和人员管理到流程设计与增长支持。','industries.constructionTitle':'建筑与房地产','industries.constructionBody':'为成长型企业提供项目会计、内控、税务、薪资及运营支持。','industries.tradingTitle':'贸易与分销','industries.tradingBody':'支持库存、营运资金、管理报告及快速业务环境下的税务需求。','industries.healthTitle':'医疗与健康','industries.healthBody':'为医疗业务提供结构化财务、合规、薪资及管理报告支持。','industries.techTitle':'科技与IT','industries.techBody':'可扩展的财务流程、管理报告、人力资源支持及运营架构。','industries.hospitalityTitle':'酒店与餐饮','industries.hospitalityBody':'面向服务型企业的成本、预算、薪资、内控和运营报告。','industries.manufacturingTitle':'制造与工业','industries.manufacturingBody':'成本会计、库存控制、预算管理及运营绩效分析。','industries.professionalTitle':'专业服务','industries.professionalBody':'围绕专业服务企业提供记账、税务、薪资、报告及咨询支持。','industries.agriTitle':'农业与资源','industries.agriBody':'为资源型业务提供成本跟踪、内控、报告及运营支持。',
+                'odoo.eyebrow':'Odoo 企业解决方案','odoo.title1':'用 Odoo 运营您的业务。','odoo.title2':'围绕您的需求打造。','odoo.body':'我们根据企业真实流程实施和配置 Odoo，将财务、销售、采购、库存及日常运营连接到一个实用系统中。','odoo.chip1':'实施','odoo.chip2':'配置','odoo.chip3':'培训与支持','odoo.f1':'系统实施与业务流程配置','odoo.f2':'会计、财务与报告设置','odoo.f3':'销售、CRM、采购与库存流程','odoo.f4':'用户培训、上线支持与持续优化','odoo.cta':'咨询 Odoo 方案','odoo.priceTitle':'具有竞争力且注重成本的实施方案','odoo.priceBody':'根据公司规模、模块范围及实际实施需求制定服务范围与价格。','odoo.disclaimer':'Odoo 是 Odoo S.A. 的商标。Nova Vision Advisory 提供独立实施与咨询服务，并不声明官方合作伙伴身份。','odoo.serviceOption':'Odoo 实施与解决方案',
                 'footprint.title1':'经验跨越','footprint.title2':'不同市场','countries.egypt':'埃及（总部）','countries.saudi':'沙特阿拉伯','countries.uae':'阿联酋','countries.oman':'阿曼','countries.qatar':'卡塔尔','countries.india':'印度','countries.philippines':'菲律宾',
                 'meeting.title1':'预约','meeting.title2':'会议','meeting.body':'告诉我们您希望业务走向哪里，我们将帮助您搭建实现目标所需的运营体系。','meeting.direct':'直线电话','meeting.support':'支持热线','meeting.choose':'选择您偏好的联系方式','meeting.emailTitle':'电子邮箱','meeting.emailBody':'发送邮件给我们',
                 'faq.eyebrow':'常见问题','faq.title1':'开始合作前，','faq.title2':'先把问题说清楚。','faq.q1':'是否必须同时购买所有服务？','faq.a1':'不需要。您可以只选择一项服务，也可以在有需要时组合多项服务。我们会根据企业的实际需求设计服务范围。','faq.q2':'专业服务费用如何确定？','faq.a2':'费用取决于工作规模与复杂程度、所需服务、交易量、参与深度以及交付方式。我们会先了解工作范围，再提供清晰的方案，让您在开始前明确服务内容。','faq.q3':'如何联系 Nova Vision？','faq.a3':'您有两种简单方式：通过本网站显示的电话、WhatsApp 或邮箱直接联系我们；或者在下方回电表单留下信息，由我们的团队联系您。','faq.q4':'可以为埃及以外的企业提供服务吗？','faq.a4':'可以。我们的经验覆盖多个区域和国际市场。根据项目性质和当地要求，许多服务可以远程交付，或采用协调的混合模式。','faq.q5':'如何处理客户的机密商业信息？','faq.a5':'我们将客户信息视为机密，并仅在约定的项目范围内使用。同时，我们建议不要通过网站表单提交密码、银行登录信息或高度敏感的数据。',
