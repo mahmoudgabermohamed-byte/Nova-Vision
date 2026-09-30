@@ -9,9 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+Arabic:wght@300;400;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <script>
+<script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -39,19 +37,7 @@
         body { background-color: #030E26; color: #fff; }
         html[dir="rtl"] body { font-family: 'Noto Sans Arabic', 'Outfit', sans-serif; }
         html[lang="zh"] body { font-family: 'Noto Sans SC', 'Outfit', sans-serif; }
-
-
-        /* Mobile Safari/Chrome rendering fix for fixed navigation */
-        nav {
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            will-change: transform;
-            isolation: isolate;
-        }
-
-        .glass-panel {
+.glass-panel {
             background: rgba(3, 14, 38, 0.86);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -96,12 +82,36 @@
         html[dir="rtl"] .dir-gap { direction:rtl; }
         html[dir="rtl"] .phone-number { direction:ltr; unicode-bidi:embed; }
         html[dir="rtl"] input[type="tel"], html[dir="rtl"] input[type="email"] { direction:ltr; text-align:left; }
+
+        /* Cross-browser interaction hardening */
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        body { min-height: 100%; overflow-x: hidden; }
+        nav { position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 1000; background: rgba(3,14,38,.98); }
+        #mobileMenu { z-index: 1001; }
+        #mobileMenuBtn, #languageSelect { position: relative; z-index: 1002; }
+        #contactDock { z-index: 1100; }
+        .decorative-layer { pointer-events: none !important; user-select: none; -webkit-user-select: none; }
+        a, button, select, input, textarea, label {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        a, button, select { cursor: pointer; }
+        button, a { -webkit-user-select: none; user-select: none; }
+        section[id] { scroll-margin-top: 96px; }
+        @media (hover: none) {
+            .hover-lift:hover { transform: none; box-shadow: none; }
+        }
+        @media (max-width: 1023px) {
+            .glass-panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
+            nav { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+            #mobileMenu { position: absolute; }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-nova-purple selection:text-white relative">
 
     <!-- NAVIGATION -->
-    <nav class="fixed w-full z-50 bg-[#030E26]/95 backdrop-blur-md py-3 transition-all duration-300 border-b border-white/5 shadow-[0_6px_24px_rgba(0,0,0,0.12)]">
+    <nav class="fixed w-full z-50 bg-[#030E26]/95 py-3 transition-all duration-300 border-b border-white/5 shadow-[0_6px_24px_rgba(0,0,0,0.12)]">
         <div class="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center gap-4">
             <a href="#home" class="flex items-center shrink-0" aria-label="Nova Vision Advisory home">
                 <img src="https://i.ibb.co/FbGpDY61/logo-png.png" alt="Nova Vision Advisory Logo" class="h-14 md:h-20 w-auto rounded-xl shadow-[0_0_15px_rgba(0,210,255,0.15)]">
@@ -158,10 +168,10 @@
 
     <!-- HERO -->
     <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28">
-        <div class="absolute inset-0 bg-gradient-to-b from-[#030E26]/40 via-[#030E26]/80 to-[#030E26]"></div>
-        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-nova-purple/10 blur-3xl rounded-full"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-nova-cyan/10 blur-3xl rounded-full"></div>
-        <div class="relative z-10 text-center px-6 w-full max-w-6xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
+        <div class="decorative-layer absolute inset-0 bg-gradient-to-b from-[#030E26]/40 via-[#030E26]/80 to-[#030E26]"></div>
+        <div class="decorative-layer absolute top-1/4 left-1/4 w-72 h-72 bg-nova-purple/10 blur-3xl rounded-full"></div>
+        <div class="decorative-layer absolute bottom-1/4 right-1/4 w-72 h-72 bg-nova-cyan/10 blur-3xl rounded-full"></div>
+        <div class="relative z-10 text-center px-6 w-full max-w-6xl mx-auto">
             <span class="uppercase tracking-[0.3em] text-sm font-bold text-nova-cyan mb-6 block" data-i18n="hero.eyebrow">Corporate Advisory & Management</span>
             <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-8 w-full">
                 <span data-i18n="hero.title1">From Vision.</span> <span class="text-gradient" data-i18n="hero.title2">To Operation. To Growth.</span>
@@ -180,7 +190,7 @@
     <section id="about" class="py-24 relative border-y border-white/5 bg-[#010614]/35">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div data-aos="fade-right">
+                <div>
                     <p class="uppercase tracking-[.25em] text-sm font-bold text-nova-cyan mb-4" data-i18n="about.eyebrow">About Nova Vision</p>
                     <h2 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
                         <span data-i18n="about.title1">Built on experience.</span> <span class="text-gradient" data-i18n="about.title2">Focused on execution.</span>
@@ -192,7 +202,7 @@
                         Our approach combines specialist expertise with real operating experience. We do not stop at recommendations; we work alongside management teams to build processes, strengthen control, solve day-to-day challenges and create a clearer path for sustainable growth.
                     </p>
                 </div>
-                <div class="grid grid-cols-2 gap-5" data-aos="fade-left">
+                <div class="grid grid-cols-2 gap-5">
                     <div class="glass-panel rounded-3xl p-7 hover-lift">
                         <div class="text-4xl font-extrabold text-gradient mb-2">2020</div>
                         <p class="font-bold" data-i18n="about.stat1Title">Market presence</p>
@@ -221,12 +231,12 @@
     <!-- SERVICES -->
     <section id="services" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16" data-aos="fade-up">
+            <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4"><span data-i18n="services.title1">Integrated</span> <span class="text-gradient" data-i18n="services.title2">Capabilities</span></h2>
                 <p class="text-gray-400 max-w-2xl mx-auto" data-i18n="services.body">Four specialist teams. One coordinated delivery model. Choose a single function or combine services into an end-to-end managed operating platform.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="glass-panel p-8 rounded-2xl hover-lift" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-panel p-8 rounded-2xl hover-lift">
                     <div class="w-14 h-14 rounded-full bg-nova-cyan/20 flex items-center justify-center mb-6 text-nova-cyan text-2xl"><i class="fa-solid fa-chart-line"></i></div>
                     <h3 class="text-xl font-bold mb-3" data-i18n="services.advisoryTitle">Business Advisory</h3>
                     <ul class="text-sm text-gray-400 space-y-2">
@@ -235,7 +245,7 @@
                         <li><i class="fa-solid fa-check text-nova-cyan mr-2 rtl:mr-0 rtl:ml-2"></i><span data-i18n="services.advisory3">Process Optimization</span></li>
                     </ul>
                 </div>
-                <div class="glass-panel p-8 rounded-2xl hover-lift" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-panel p-8 rounded-2xl hover-lift">
                     <div class="w-14 h-14 rounded-full bg-nova-purple/20 flex items-center justify-center mb-6 text-nova-purple text-2xl"><i class="fa-solid fa-calculator"></i></div>
                     <h3 class="text-xl font-bold mb-3" data-i18n="services.accountingTitle">Accounting & Tax</h3>
                     <ul class="text-sm text-gray-400 space-y-2">
@@ -244,7 +254,7 @@
                         <li><i class="fa-solid fa-check text-nova-purple mr-2 rtl:mr-0 rtl:ml-2"></i><span data-i18n="services.accounting3">Financial Control (IFRS)</span></li>
                     </ul>
                 </div>
-                <div class="glass-panel p-8 rounded-2xl hover-lift" data-aos="fade-up" data-aos-delay="300">
+                <div class="glass-panel p-8 rounded-2xl hover-lift">
                     <div class="w-14 h-14 rounded-full bg-nova-orange/20 flex items-center justify-center mb-6 text-nova-orange text-2xl"><i class="fa-solid fa-users-gear"></i></div>
                     <h3 class="text-xl font-bold mb-3" data-i18n="services.hrTitle">HR & People</h3>
                     <ul class="text-sm text-gray-400 space-y-2">
@@ -253,7 +263,7 @@
                         <li><i class="fa-solid fa-check text-nova-orange mr-2 rtl:mr-0 rtl:ml-2"></i><span data-i18n="services.hr3">HR Policies Setup</span></li>
                     </ul>
                 </div>
-                <div class="glass-panel p-8 rounded-2xl hover-lift" data-aos="fade-up" data-aos-delay="400">
+                <div class="glass-panel p-8 rounded-2xl hover-lift">
                     <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center mb-6 text-white text-2xl"><i class="fa-solid fa-building-columns"></i></div>
                     <h3 class="text-xl font-bold mb-3" data-i18n="services.bankTitle">Corporate Banking</h3>
                     <ul class="text-sm text-gray-400 space-y-2">
@@ -269,8 +279,8 @@
     <!-- FOOTPRINT -->
     <section id="footprint" class="py-20 border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-10" data-aos="fade-up"><span data-i18n="footprint.title1">Experience That</span> <span class="text-gradient" data-i18n="footprint.title2">Travels</span></h2>
-            <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-3xl font-bold mb-10"><span data-i18n="footprint.title1">Experience That</span> <span class="text-gradient" data-i18n="footprint.title2">Travels</span></h2>
+            <div class="flex flex-wrap justify-center gap-4">
                 <span class="glass-panel px-6 py-3 rounded-full font-semibold border-l-4 border-l-nova-cyan flex items-center gap-3"><img src="https://flagcdn.com/w40/eg.png" alt="Egypt Flag" class="w-6 h-auto rounded-sm"><span data-i18n="countries.egypt">Egypt (HQ)</span></span>
                 <span class="glass-panel px-6 py-3 rounded-full font-semibold border-l-4 border-l-nova-purple flex items-center gap-3"><img src="https://flagcdn.com/w40/sa.png" alt="Saudi Arabia Flag" class="w-6 h-auto rounded-sm"><span data-i18n="countries.saudi">Saudi Arabia</span></span>
                 <span class="glass-panel px-6 py-3 rounded-full font-semibold border-l-4 border-l-nova-orange flex items-center gap-3"><img src="https://flagcdn.com/w40/ae.png" alt="UAE Flag" class="w-6 h-auto rounded-sm"><span data-i18n="countries.uae">UAE</span></span>
@@ -285,14 +295,14 @@
     <!-- CONTACT / BOOK A MEETING -->
     <section id="book-meeting" class="py-24 relative bg-[#010614]/50">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16" data-aos="fade-up">
+            <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4"><span data-i18n="meeting.title1">Book a</span> <span class="text-gradient" data-i18n="meeting.title2">Meeting</span></h2>
                 <p class="text-gray-400 max-w-2xl mx-auto text-lg" data-i18n="meeting.body">Tell us where you want the business to go. We'll help build the operating engine to get it there.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <!-- Phone 1 -->
-                <div class="glass-panel p-8 rounded-2xl hover-lift flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-panel p-8 rounded-2xl hover-lift flex flex-col items-center text-center">
                     <div class="w-16 h-16 rounded-full bg-nova-cyan/10 flex items-center justify-center mb-6 text-nova-cyan text-3xl"><i class="fa-solid fa-phone-volume"></i></div>
                     <h3 class="text-xl font-bold mb-2" data-i18n="meeting.direct">Direct Line</h3>
                     <p class="text-gray-400 mb-4 text-sm" data-i18n="meeting.choose">Choose how you want to contact us</p>
@@ -304,7 +314,7 @@
                 </div>
 
                 <!-- Phone 2 -->
-                <div class="glass-panel p-8 rounded-2xl hover-lift flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-panel p-8 rounded-2xl hover-lift flex flex-col items-center text-center">
                     <div class="w-16 h-16 rounded-full bg-nova-purple/10 flex items-center justify-center mb-6 text-nova-purple text-3xl"><i class="fa-solid fa-mobile-screen"></i></div>
                     <h3 class="text-xl font-bold mb-2" data-i18n="meeting.support">Support Line</h3>
                     <p class="text-gray-400 mb-4 text-sm" data-i18n="meeting.choose">Choose how you want to contact us</p>
@@ -316,7 +326,7 @@
                 </div>
 
                 <!-- Email -->
-                <a href="mailto:info@novavisionadvisory.com" class="glass-panel p-8 rounded-2xl hover-lift flex flex-col items-center text-center group" data-aos="fade-up" data-aos-delay="300">
+                <a href="mailto:info@novavisionadvisory.com" class="glass-panel p-8 rounded-2xl hover-lift flex flex-col items-center text-center group">
                     <div class="w-16 h-16 rounded-full bg-nova-orange/10 flex items-center justify-center mb-6 text-nova-orange text-3xl group-hover:scale-110 transition"><i class="fa-solid fa-envelope"></i></div>
                     <h3 class="text-xl font-bold mb-2" data-i18n="meeting.emailTitle">Email Address</h3>
                     <p class="text-gray-400 mb-4 text-sm" data-i18n="meeting.emailBody">Send us a message</p>
@@ -329,12 +339,12 @@
     <!-- FAQ -->
     <section id="faq" class="py-24 relative">
         <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-14" data-aos="fade-up">
+            <div class="text-center mb-14">
                 <p class="uppercase tracking-[.25em] text-sm font-bold text-nova-cyan mb-4" data-i18n="faq.eyebrow">Frequently Asked Questions</p>
                 <h2 class="text-4xl md:text-5xl font-extrabold"><span data-i18n="faq.title1">Clear answers before</span> <span class="text-gradient" data-i18n="faq.title2">we get started.</span></h2>
             </div>
 
-            <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="space-y-4">
                 <div class="faq-item glass-panel rounded-2xl overflow-hidden">
                     <button class="faq-toggle w-full px-6 py-5 flex justify-between items-center gap-6 text-left rtl:text-right">
                         <span class="font-bold text-lg" data-i18n="faq.q1">Do we need to subscribe to all services?</span>
@@ -380,14 +390,14 @@
 
     <!-- LEAD FORM -->
     <section id="lead-form" class="py-24 relative overflow-hidden bg-[#010614]/35">
-        <div class="absolute inset-0 pointer-events-none">
+        <div class="decorative-layer absolute inset-0 pointer-events-none">
             <div class="absolute -top-24 -left-24 w-72 h-72 bg-nova-cyan/10 rounded-full blur-3xl"></div>
             <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-nova-purple/10 rounded-full blur-3xl"></div>
         </div>
 
         <div class="max-w-6xl mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 items-stretch">
-                <div class="lg:col-span-2" data-aos="fade-right">
+                <div class="lg:col-span-2">
                     <div class="h-full glass-panel rounded-3xl p-8 md:p-10 flex flex-col justify-between">
                         <div>
                             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-gray-300 mb-6"><span class="w-2 h-2 rounded-full bg-nova-cyan animate-pulse"></span><span data-i18n="form.prefer">Prefer us to contact you?</span></div>
@@ -403,7 +413,7 @@
                     </div>
                 </div>
 
-                <div class="lg:col-span-3" data-aos="fade-left">
+                <div class="lg:col-span-3">
                     <div class="relative glass-panel rounded-3xl p-8 md:p-10 lead-grid-glow">
                         <div class="mb-8"><p class="text-sm uppercase tracking-[0.22em] text-nova-cyan font-bold mb-3" data-i18n="form.request">Request a Callback</p><h3 class="text-2xl md:text-3xl font-bold" data-i18n="form.howHelp">How can we help?</h3></div>
 
@@ -454,10 +464,10 @@
     <footer class="py-8 border-t border-white/5 text-center text-sm text-gray-500"><p>&copy; 2026 Nova Vision Advisory. <span data-i18n="footer.rights">All rights reserved.</span></p></footer>
 
     <!-- FLOATING CONTACT -->
-    <div class="fixed bottom-6 right-6 rtl:right-auto rtl:left-6 z-50 flex flex-col items-end rtl:items-start">
+    <div id="contactDock" class="fixed bottom-6 right-6 rtl:right-auto rtl:left-6 z-50 flex flex-col items-end rtl:items-start">
         <div id="contactBox" class="glass-panel p-6 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] border border-white/10 w-80 relative overflow-hidden mb-4 transition-all duration-300 opacity-0 pointer-events-none transform translate-y-4">
             <div class="absolute top-0 left-0 w-full h-1 bg-nova-gradient"></div>
-            <div class="flex justify-between items-center mb-4"><h4 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-headset text-nova-cyan"></i><span data-i18n="float.title">Get in Touch</span></h4><button onclick="toggleContact()" class="text-gray-400 hover:text-white transition" aria-label="Close contact box"><i class="fa-solid fa-xmark text-lg"></i></button></div>
+            <div class="flex justify-between items-center mb-4"><h4 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-headset text-nova-cyan"></i><span data-i18n="float.title">Get in Touch</span></h4><button type="button" data-contact-toggle class="text-gray-400 hover:text-white transition" aria-label="Close contact box"><i class="fa-solid fa-xmark text-lg"></i></button></div>
 
             <div class="space-y-4">
                 <div class="p-3 rounded-xl bg-white/5">
@@ -467,17 +477,13 @@
                     <div class="flex items-center justify-between gap-3 mb-2"><div><p class="text-xs text-gray-400" data-i18n="meeting.support">Support Line</p><p class="phone-number font-bold text-sm">+(20) 101 218 4214</p></div><div class="flex gap-2"><a href="tel:+201012184214" class="w-9 h-9 rounded-full bg-nova-purple/15 text-nova-purple flex items-center justify-center"><i class="fa-solid fa-phone"></i></a><a href="https://wa.me/201012184214" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-green-500/15 text-green-400 flex items-center justify-center"><i class="fa-brands fa-whatsapp"></i></a></div></div>
                 </div>
                 <a href="mailto:info@novavisionadvisory.com" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition group"><div class="w-10 h-10 rounded-full bg-nova-orange/20 flex items-center justify-center"><i class="fa-solid fa-envelope text-nova-orange"></i></div><div><p class="text-xs text-gray-400" data-i18n="float.email">Email Us</p><p class="font-bold text-xs truncate w-40">info@novavisionadvisory.com</p></div></a>
-                <a href="#lead-form" onclick="toggleContact()" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition group"><div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><i class="fa-solid fa-pen-to-square text-white"></i></div><div><p class="text-xs text-gray-400" data-i18n="float.cantCall">Can't call now?</p><p class="font-bold text-sm" data-i18n="float.leave">Leave your details</p></div></a>
+                <a href="#lead-form" data-contact-close class="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition group"><div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><i class="fa-solid fa-pen-to-square text-white"></i></div><div><p class="text-xs text-gray-400" data-i18n="float.cantCall">Can't call now?</p><p class="font-bold text-sm" data-i18n="float.leave">Leave your details</p></div></a>
             </div>
             <div class="mt-4 pt-4 border-t border-white/10 text-xs text-gray-400 flex items-start gap-2"><i class="fa-solid fa-location-dot mt-1 text-nova-cyan"></i><p data-i18n="float.location">HQ: Dokki, Giza, Egypt<br>Available globally.</p></div>
         </div>
-        <button onclick="toggleContact()" id="toggleBtn" class="bg-nova-gradient p-1 rounded-full shadow-[0_10px_30px_rgba(138,43,226,0.4)] hover:scale-110 transition-transform float-btn cursor-pointer" aria-label="Open contact options"><div class="bg-nova-dark w-14 h-14 rounded-full flex items-center justify-center"><i class="fa-solid fa-comment-dots text-white text-2xl"></i></div></button>
+        <button type="button" data-contact-toggle id="toggleBtn" class="bg-nova-gradient p-1 rounded-full shadow-[0_10px_30px_rgba(138,43,226,0.4)] hover:scale-110 transition-transform float-btn cursor-pointer" aria-label="Open contact options"><div class="bg-nova-dark w-14 h-14 rounded-full flex items-center justify-center"><i class="fa-solid fa-comment-dots text-white text-2xl"></i></div></button>
     </div>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ once: true, offset: 50 });
-
+<script>
         const translations = {
             en: {
                 langName:'English',
@@ -517,12 +523,19 @@
             }
         };
 
-        let currentLang = localStorage.getItem('novaLanguage') || 'en';
+        function safeStorageGet(key) {
+            try { return window.localStorage ? localStorage.getItem(key) : null; } catch (e) { return null; }
+        }
+        function safeStorageSet(key, value) {
+            try { if (window.localStorage) localStorage.setItem(key, value); } catch (e) {}
+        }
+
+        let currentLang = safeStorageGet('novaLanguage') || 'en';
 
         function applyLanguage(lang) {
             if (!translations[lang]) lang = 'en';
             currentLang = lang;
-            localStorage.setItem('novaLanguage', lang);
+            safeStorageSet('novaLanguage', lang);
             document.documentElement.lang = lang;
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
             const languageSelect = document.getElementById('languageSelect');
@@ -625,9 +638,26 @@
             }
         }
 
+        document.querySelectorAll('[data-contact-toggle]').forEach(function (el) {
+            el.addEventListener('click', function (event) {
+                event.preventDefault();
+                toggleContact();
+            });
+        });
+        document.querySelectorAll('[data-contact-close]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                const box = document.getElementById('contactBox');
+                if (box && !box.classList.contains('opacity-0')) toggleContact();
+            });
+        });
+
         const messageField = document.getElementById('message');
         const charCount = document.getElementById('charCount');
-        messageField.addEventListener('input', () => charCount.textContent = `${messageField.value.length} / 1500`);
+        if (messageField && charCount) {
+            messageField.addEventListener('input', function () {
+                charCount.textContent = messageField.value.length + ' / 1500';
+            });
+        }
 
         const leadForm = document.getElementById('leadForm');
         const submitBtn = document.getElementById('submitBtn');
@@ -642,6 +672,7 @@
             formStatus.textContent = message;
         }
 
+        if (leadForm && submitBtn && submitBtnText && submitBtnIcon && formStatus) {
         leadForm.addEventListener('submit', async function (event) {
             event.preventDefault();
             submitBtn.disabled = true;
@@ -650,7 +681,8 @@
             formStatus.classList.add('hidden');
 
             const formData = new FormData(leadForm);
-            const payload = Object.fromEntries(formData.entries());
+            const payload = {};
+            formData.forEach(function (value, key) { payload[key] = value; });
 
             try {
                 const response = await fetch(leadForm.action, {
@@ -676,6 +708,7 @@
                 submitBtnIcon.className = currentLang === 'ar' ? 'fa-solid fa-arrow-left' : 'fa-solid fa-arrow-right';
             }
         });
+        }
     </script>
 </body>
 </html>
