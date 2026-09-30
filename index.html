@@ -83,16 +83,14 @@
         html[dir="rtl"] .phone-number { direction:ltr; unicode-bidi:embed; }
         html[dir="rtl"] input[type="tel"], html[dir="rtl"] input[type="email"] { direction:ltr; text-align:left; }
 
-        /* Cross-browser interaction hardening */
-        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-        body { min-height: 100%; overflow-x: hidden; }
+        /* Cross-browser interaction hardening (FIXED) */
+        html, body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; min-height: 100%; }
         nav { position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 1000; background: rgba(3,14,38,.98); }
         #mobileMenu { z-index: 1001; }
         #mobileMenuBtn, #languageSelect { position: relative; z-index: 1002; }
         #contactDock { z-index: 1100; }
         .decorative-layer { pointer-events: none !important; user-select: none; -webkit-user-select: none; }
         a, button, select, input, textarea, label {
-            touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
         }
         a, button, select { cursor: pointer; }
@@ -107,7 +105,7 @@
         }
     </style>
 </head>
-<body class="antialiased selection:bg-nova-purple selection:text-white relative">
+<body class="antialiased selection:bg-nova-purple selection:text-white">
 
     <!-- NAVIGATION -->
     <nav class="fixed w-full z-50 bg-[#030E26]/95 py-3 transition-all duration-300 border-b border-white/5 shadow-[0_6px_24px_rgba(0,0,0,0.12)]">
